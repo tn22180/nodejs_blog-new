@@ -1,0 +1,33 @@
+{
+  "name": "new_blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js",
+    "watch": "node-sass --watch src/resources/scss/ -o src/public/css/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tn22180/nodejs_blog-new.git"
+  },
+  "keywords": [
+    "tn22180"
+  ],
+  "author": "Tuannv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tn22180/nodejs_blog-new/issues"
+  },
+  "homepage": "https://github.com/tn22180/nodejs_blog-new#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "node-sass": "^7.0.1",
+    "nodemon": "^2.0.15"
+  }
+}
