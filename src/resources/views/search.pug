@@ -1,0 +1,12 @@
+extends layouts/main.pug
+block content
+    form.row.g-3(method="POST" action="")
+        div.col
+            label.visually-hidden(for='staticEmail2') Search
+            input#staticEmail2.form-control-plaintext.bg-secondary(type='text' name='q')
+            select.form-select(aria-label='Default select example')(name='gender')
+                option(selected='') Open this select menu
+                option(value='1') One
+                option(value='2') Two
+                option(value='3') Three
+        button.btn.btn-primary.mb-3(type='submit') Confirm

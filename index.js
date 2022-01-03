@@ -7,24 +7,21 @@ const port = 3000;
 const path = require('path');
 const morgan = require('morgan');
 
-// static file
 
+const route = require('./src/routes');
+// static file
 app.use(express.static(path.join(__dirname, 'src','public')));
-// app.engine('pug', pug.engine);
+// use middleware
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 app.use(morgan('combined'))
 // app.set('views','home')
 app.set('view engine', 'pug');
 app.set('views',path.join(__dirname, 'src', 'resources','views') )
-app.get('/', (req, res) => {
-    res.render('home', {
-        title : "Home Page"
-    });
-});
-app.get('/about', (req, res) => {
-    res.render('about', {
-        title : 'About'
-    });
-});
+
+// route init
+route(app);
+
 app.listen(port, () => {
     console.log(`http://localhost:${port}`);
 });
