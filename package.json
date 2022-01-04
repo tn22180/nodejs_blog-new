@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "formater": "lint-staged",
     "start": "nodemon --inspect index.js",
-    "watch": "node-sass --watch src/resources/scss/ -o src/public/css/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "node-sass --watch src/resources/scss/ -o src/public/css/"
   },
   "repository": {
     "type": "git",
@@ -20,14 +20,19 @@
   "bugs": {
     "url": "https://github.com/tn22180/nodejs_blog-new/issues"
   },
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
   "homepage": "https://github.com/tn22180/nodejs_blog-new#readme",
   "dependencies": {
     "express": "^4.17.2",
     "pug": "^3.0.2"
   },
   "devDependencies": {
+    "lint-staged": "^12.1.5",
     "morgan": "^1.10.0",
     "node-sass": "^7.0.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
   }
 }

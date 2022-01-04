@@ -1,15 +1,12 @@
-class AboutController{
-    show(req, res)
-    {
+class AboutController {
+    show(req, res) {
         res.send('This is slug');
-        
     }
-    index(req, res)
-    {
+    index(req, res) {
         // [GET] about
         res.render('about', {
-            title : 'About'
+            title: 'About',
         });
     }
 }
-module.exports = new AboutController;
+module.exports = new AboutController();

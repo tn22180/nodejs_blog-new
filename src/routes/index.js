@@ -1,15 +1,9 @@
+const aboutRouter = require('./about');
+const siteRouter = require('./site');
 
-const aboutRouter = require('./about')
-const siteRouter = require('./site')
-
-
-function route(app)
-{
+function route(app) {
     app.use('/about', aboutRouter);
-  
-    app.use('/', siteRouter);
-  
 
-    
+   app.use('/', siteRouter);
 }
 module.exports = route;
