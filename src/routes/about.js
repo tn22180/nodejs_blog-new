@@ -4,7 +4,7 @@ const router = express.Router();
 
 const aboutController = require('../app/controllers/AboutController');
 
-            router.use('/:slug', aboutController.show);
+router.use('/:slug', aboutController.show);
 
 router.use('/', aboutController.index);
 
