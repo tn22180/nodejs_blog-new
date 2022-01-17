@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "formater": "lint-staged",
+    "formater": "prettier --single-quote --trailing-comma all --tab-width 4 --write 'src/**/*.{js,json,scss}'",
     "start": "nodemon --inspect index.js",
     "watch": "node-sass --watch src/resources/scss/ -o src/public/css/"
   },
@@ -23,11 +23,15 @@
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
   },
-  
   "homepage": "https://github.com/tn22180/nodejs_blog-new#readme",
   "dependencies": {
     "express": "^4.17.2",
-    
+    "method-override": "^3.0.0",
+    "mongodb": "^4.2.2",
+    "mongoose": "^6.1.4",
+    "mongoose-delete": "^0.5.4",
+    "mongoose-sequence": "^5.3.1",
+    "mongoose-slug-generator": "^1.0.4",
     "pug": "^3.0.2"
   },
   "devDependencies": {

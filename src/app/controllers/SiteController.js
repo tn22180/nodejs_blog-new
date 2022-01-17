@@ -1,9 +1,15 @@
+const User = require('../model/User');
+const { mutipleMongooseToObject } = require('../../util/mongoose');
+
 class SiteController {
     index(req, res) {
-        // [GET] about
-        res.render('home', {
-            title: 'Home Page',
-        });
+        User.find({})
+            .then((cousres) => {
+                res.render('home', {
+                    cousres: mutipleMongooseToObject(cousres),
+                });
+            })
+            .catch(res.next);
     }
     search(req, res) {
         // [GET] about
@@ -12,4 +18,5 @@ class SiteController {
         });
     }
 }
+
 module.exports = new SiteController();

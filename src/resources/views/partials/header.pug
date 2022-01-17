@@ -1,16 +1,17 @@
 header
    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-        div.container-fluid
-            a.navbar-brand(href='#') Navbar
+        div.container
+            a.navbar-brand(href='/') Navbar
             button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
                 span.navbar-toggler-icon
             div#navbarNav.collapse.navbar-collapse
-                ul.navbar-nav
+                ul.navbar-nav.ms-auto.mb-2.mb-lg-0
                     li.nav-item
-                        a.nav-link.active(aria-current='page' href='#') Home
+                        a.nav-link(href='/user/create') Create
                     li.nav-item
-                        a.nav-link(href='#') Features
+                        a.nav-link(href='/me/stored/courses') My courses
                     li.nav-item
-                        a.nav-link(href='#') Pricing
+                        a.nav-link(href='#') Setting
                     li.nav-item
-                        a.nav-link.disabled Disabled
+                        a.nav-link(href='#') Log out
+                    

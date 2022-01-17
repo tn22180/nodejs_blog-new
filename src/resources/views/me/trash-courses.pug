@@ -1,0 +1,122 @@
+extends ../layouts/main.pug
+block content
+    form.container(name='container-form' method='POST' action='/user/handle-form-action-bin')
+        h3 Deleted User
+        a(href="/me/stored/courses") Back
+        .mt-5.d-flex.flex-row.align-items-center
+            .form-check.me-3
+                input#check-all.form-check-input(type='checkbox' value='')
+                label.form-check-label(for='flexCheckDefault')
+                    |Check All
+            select.form-select.select-all-options.me-3(aria-label='Default select example' name="action" required)
+                option(value='') ---Select service---
+                option(value='restore') Restore
+                option(value='force-delete') Force Delete
+                
+            button.btn.btn-primary.btn-sm.disabled.btn-check-all Submit
+        table.table.mt-5
+            thead
+                tr
+                td
+                th(scope='col') #
+                th(scope='col') User Name
+                th(scope='col') Info
+                th(scope='col') Time deleted
+                th
+            tbody
+                each user,index in users
+                    tr
+                    td 
+                        input.form-check-input(type='checkbox' name='userId[]' value=user._id)
+                    th(scope='row')=index+1
+                    td=user.name
+                    td=user.info
+                    td=user.createdAt
+                    td 
+                        a.btn.btn-link.btn-restore(href='' data-id=user._id) Restore
+                        a.btn.btn-link(href='' data-bs-toggle="modal" data-bs-target="#delete-user" data-id=user._id) Force Delete
+                        #delete-user.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+                            .modal-dialog
+                                .modal-content
+                                    .modal-header
+                                        h5#exampleModalLabel.modal-title Delete User?
+                                        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                    .modal-body Do you want to force delete this user?
+                                    .modal-footer
+                                        button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
+                                        button#btn-delete-user.btn.btn-danger(type='button') Delete
+                else 
+                    tr 
+                        td.text-center(colspan="5") Bin is empty.  
+                            a(href="/me/stored/courses") List User
+                form(method='POST' action='' name='delete-user-form')
+                form(method='POST' action='' name='restore-user-form')
+                script.
+                    var userItemCheckBoxs = document.querySelectorAll('input[name="userId[]"]')
+                    var checkAllSubmitBtn = document.querySelector('.btn-check-all')
+                    var containerForm = document.querySelector('form[name=container-form]')
+                    var checkBoxAll = document.querySelector('#check-all')
+                    var exampleModal = document.getElementById('delete-user')
+                    var deleteForm = document.forms["delete-user-form"]
+                    var restoreForm = document.forms["restore-user-form"]
+                    var btnRestores = document.querySelectorAll('.btn-restore');
+                    var userId;
+                    var btnDeleteUser = document.getElementById('btn-delete-user')
+                    exampleModal.addEventListener('show.bs.modal', function (event) {
+                        var button = event.relatedTarget
+                        userId = button.getAttribute('data-id')
+                        
+                    })
+                
+                     btnDeleteUser.onclick = function(){
+                            deleteForm.action = '/user/'+userId+'?_method=DELETE'
+                            deleteForm.submit();
+                    }
+                    btnDeleteUser.onclick = function(){
+                            deleteForm.action = '/user/'+userId+'/force?_method=DELETE'
+                            deleteForm.submit();
+                    }
+                    btnRestores.forEach(function(btnRestore){
+                        btnRestore.onclick = function(e)
+                        {
+                            e.preventDefault();
+                            var userID = this.getAttribute('data-id');
+                            restoreForm.action = '/user/'+userID+'/restore?_method=PATCH'
+                            restoreForm.submit();
+                        }
+                    })
+                    checkBoxAll.onchange = function(e)
+                    {
+                            userItemCheckBoxs.forEach(userItemCheckBox => {
+                                userItemCheckBox.checked = checkBoxAll.checked;
+                            })
+                            renderChechAllSubmitBtn()
+                    }
+                    userItemCheckBoxs.forEach(userItemCheckBox => {
+                        userItemCheckBox.onchange = () => {
+                        var isCheckAll = userItemCheckBoxs.length === document.querySelectorAll('input[name="userId[]"]:checked').length;
+                        checkBoxAll.checked = isCheckAll;
+                        renderChechAllSubmitBtn()
+                        }
+                    })
+                    //- Re-render
+                    function renderChechAllSubmitBtn() {
+                        var checkedCount = document.querySelectorAll('input[name="userId[]"]:checked').length;
+                        if(checkedCount){
+                            checkAllSubmitBtn.classList.remove('disabled')
+                        }
+                        else{
+                            checkAllSubmitBtn.classList.add('disabled')
+
+                        }
+                    }
+                    //- checked all btn clicked
+                     checkAllSubmitBtn.on('submit', function(e)
+                     {
+                         var isSubmitable = checkAllSubmitBtn.classList.contains('disabled')
+                        if(isSubmitable){
+                           e.preventDefault();
+                        }
+                     })
+                    
+block more_content

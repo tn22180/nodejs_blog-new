@@ -1,0 +1,21 @@
+extends ../layouts/main.pug
+block content
+    .container.mt-5 
+        h2.text-secondary Update User
+            
+                form.container(method='POST' action='/user/'+user._id+'?_method=PUT')
+                    .mb-3
+                        label.form-label(for='#name') Name User
+                        input#name.form-control(type='text' name ='name' value=user.name)
+                    
+                    .mb-3
+                        label.form-label(for='#img') Address Image
+                        input#name.form-control(type='text' name ='img' value=user.img)
+                    
+                    .mb-3
+                        label.form-label(for='#info') Info User
+                        input#name.form-control(type='text' name ='info' value=user.info)
+                        
+                    button.btn.btn-primary(type='submit') Create User
+
+block more_content

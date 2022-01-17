@@ -1,5 +1,17 @@
 extends layouts/main.pug
 block content
-    h2 This is Home Page
-block more_content
-   p This is Home Page Description
+
+ .container.mt-5
+    .row 
+     each cousre in cousres
+        .col-sm-6.col-lg-4.mt-3
+            .card(style='width: 18rem;')
+                a(href="/user/" + cousre.slug)
+                    img.card-img-top(src=cousre.img alt='...')
+                .card-body
+                    a(href="/user/" + cousre.slug)
+                        h5.card-title=cousre.name
+                    p.card-text.text-primary= cousre.info
+                    a.btn.btn-primary(href='#') See more
+
+block more_content 

@@ -1,0 +1,18 @@
+extends ../layouts/main.pug
+block content
+    form.container(method='POST' action='/user/store')
+        .mb-3
+            label.form-label(for='#name') Name User
+            input#name.form-control(type='text' name ='name')
+           
+        .mb-3
+            label.form-label(for='#img') Address Image
+            input#name.form-control(type='text' name ='img')
+           
+        .mb-3
+            label.form-label(for='#info') Info User
+            input#name.form-control(type='text' name ='info')
+            
+        button.btn.btn-primary(type='submit') Create User
+
+block more_content
