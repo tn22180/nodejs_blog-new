@@ -9,9 +9,10 @@ const User = new Schema(
     {
         _id: { type: Number },
         name: { type: String },
-        info: { type: String },
-        slug: { type: String },
         img: { type: String },
+        email: { type: String },
+        password: { type: String },
+        info: { type: String },
         slug: { type: String, slug: 'name', unique: true },
     },
     {

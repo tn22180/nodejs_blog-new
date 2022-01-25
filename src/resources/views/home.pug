@@ -2,16 +2,31 @@ extends layouts/main.pug
 block content
 
  .container.mt-5
-    .row 
-     each cousre in cousres
-        .col-sm-6.col-lg-4.mt-3
-            .card(style='width: 18rem;')
-                a(href="/user/" + cousre.slug)
-                    img.card-img-top(src=cousre.img alt='...')
-                .card-body
-                    a(href="/user/" + cousre.slug)
-                        h5.card-title=cousre.name
-                    p.card-text.text-primary= cousre.info
-                    a.btn.btn-primary(href='#') See more
+    .row
+        each user in users
+            .col-sm-6.col-lg-4.mt-3
+                .card(style='width: 18rem;')
+                    a(href="/user/" + user.slug)
+                        img.card-img-top(src='/'+user.img alt='...')
+                    .card-body
+                        a(href="/user/" + user.slug)
+                            h5.card-title=user.name
+                        p.card-text.text-primary= user.info
+                        a.btn.btn-primary(href='/cart/add/'+user._id) Add Cart
+        nav(aria-label='Page navigation example')
+                    ul.pagination
+                        li.page-item
+                            a.page-link(href='#' aria-label='Previous')
+                                span(aria-hidden='true') &laquo;
+                        li.page-item
+                            a.page-link(href='/?page=1') 1
+                        li.page-item
+                            a.page-link(href='/?page=2') 2
+                        li.page-item
+                            a.page-link(href='/?page=3') 3
+                        li.page-item
+                            a.page-link(href='#' aria-label='Next')
+                                span(aria-hidden='true') &raquo;
+
 
 block more_content 

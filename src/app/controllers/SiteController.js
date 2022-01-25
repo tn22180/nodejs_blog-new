@@ -1,15 +1,20 @@
 const User = require('../model/User');
+const Session = require('../model/Session');
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 
 class SiteController {
-    index(req, res) {
+    index(req, res, next) {
         User.find({})
-            .then((cousres) => {
+            .then((users) => {
+                var page = parseInt(req.query.page) || 1;
+                var perPage = 8;
+                const start = (page-1)*perPage;
+                const end = page*perPage;
                 res.render('home', {
-                    cousres: mutipleMongooseToObject(cousres),
+                    users: mutipleMongooseToObject(users.slice(start,end)),
                 });
             })
-            .catch(res.next);
+            .catch(next);
     }
     search(req, res) {
         // [GET] about

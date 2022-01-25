@@ -1,5 +1,5 @@
 const User = require('../model/User');
-const { mongooseToObject } = require('../../util/mongoose');
+const { mongooseToObject, mutipleMongooseToObject  } = require('../../util/mongoose');
 
 class UserController {
     // [GET] :slug
@@ -9,6 +9,17 @@ class UserController {
                 res.render('user/show', { user: mongooseToObject(user) });
             })
             .catch(next);
+    }
+    // [GET] /user/search
+    search(req, res, next) {
+       const q = req.query.q;
+       User.find({ name: new RegExp(q)})
+       .then((users) => {
+        res.render('home', {
+            users: mutipleMongooseToObject(users),
+        });
+    })
+    .catch(next);
     }
     // [GET] /create
     create(req, res, next) {
@@ -23,8 +34,10 @@ class UserController {
     }
     // [POST] /user/store
     store(req, res, next) {
+        req.body.img = req.file.path.split('/').slice(5).join('/');
         const user = new User(req.body);
-        user.save()
+        user
+            .save()
             .then(() => res.redirect('/'))
             .catch(next);
     }
